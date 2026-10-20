@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {monthCells} from './calendar.mjs';
+const days=(y,m)=>monthCells(y,m).filter(x=>x!==null);
+assert.equal(days(2024,2).length,29);
+assert.equal(days(2023,2).length,28);
+assert.equal(days(1900,2).length,28);
+assert.equal(days(2000,2).length,29);
+assert.equal(monthCells(2024,2).indexOf(1),4);
+assert.equal(monthCells(2024,2).length%7,0);
+assert.deepEqual(days(2024,4),Array.from({length:30},(_,i)=>i+1));
+assert.throws(()=>monthCells(1899,1),RangeError);
+assert.throws(()=>monthCells(2024,13),RangeError);
+assert.throws(()=>monthCells(2024,'2'),RangeError);
+console.log('10 assertions passed');
